@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kanban Board • DSL Rules</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen bg-[#948979] transition-colors duration-300">
+
+  <div class="max-w-6xl mx-auto px-6 py-8">
+    <header class="flex items-center justify-between mb-6">
+      <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">Kanban Board</h1>
+    </header>
+
+    <section class="bg-white rounded-2xl shadow-md p-5 mb-8 transition-colors">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-lg font-semibold text-gray-800">📜 DSL Rules</h2>
+      </div>
+
+      <textarea id="dslRules"
+        placeholder='{"InProgress": {"maxCards": 3}, "Done": {"requireChecklist": true}, "Review": {"autoAssign": "QA Team"}}'
+        class="w-full rounded-lg border border-gray-200 p-4 bg-gray-50 text-gray-800 placeholder-gray-400 min-h-[120px] resize-y focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+
+      <div class="mt-4 flex items-center gap-3">
+        <button id="applyRules" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Apply Rules</button>
+        <button id="resetRules" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm">Reset to default</button>
+        <p id="dslMsg" class="text-sm text-red-500 ml-4"></p>
+      </div>
+    </section>
+
+    <div class="flex justify-center mb-8 gap-3">
+      <input id="taskInput" type="text" placeholder="Enter task..."
+        class="w-64 md:w-96 rounded-lg border border-gray-200 p-3 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      <button id="addBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Add Task</button>
+    </div>
+
+    <main class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div>
+        <h3 class="text-center font-semibold mb-2 text-gray-800">Todo</h3>
+        <div id="Todo" class="column p-4 rounded-xl min-h-[300px] bg-[#000000] shadow-inner transition-all" ondragover="allowDrop(event)" ondrop="onDrop(event,'Todo')"></div>
+      </div>
+
+      <div>
+        <h3 class="text-center font-semibold mb-2 text-gray-800">In Progress</h3>
+        <div id="InProgress" class="column p-4 rounded-xl min-h-[300px] bg-[#000000] shadow-inner transition-all" ondragover="allowDrop(event)" ondrop="onDrop(event,'InProgress')"></div>
+      </div>
+
+      <div>
+        <h3 class="text-center font-semibold mb-2 text-gray-800">Review</h3>
+        <div id="Review" class="column p-4 rounded-xl min-h-[300px] bg-[#000000] shadow-inner transition-all" ondragover="allowDrop(event)" ondrop="onDrop(event,'Review')"></div>
+      </div>
+
+      <div>
+        <h3 class="text-center font-semibold mb-2 text-gray-800">Done</h3>
+        <div id="Done" class="column p-4 rounded-xl min-h-[300px] bg-[#000000] shadow-inner transition-all" ondragover="allowDrop(event)" ondrop="onDrop(event,'Done')"></div>
+      </div>
+    </main>
+
+    <p id="error" class="text-center text-sm text-red-500 mt-6"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
